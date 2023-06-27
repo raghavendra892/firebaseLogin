@@ -1,0 +1,88 @@
+
+<div class="auths">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card class="mt-4">
+                <mat-card-title *ngIf="allreadyHaveAccount">
+                    Login
+                </mat-card-title>
+                <mat-card-title  *ngIf="!allreadyHaveAccount">
+                    Sign Up
+                </mat-card-title>
+                <mat-card-content>
+                    <ng-container  *ngIf="allreadyHaveAccount"> 
+                        <form class="loginForm" (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+                            <mat-form-field>
+                                <label class="sr-only">Email</label>
+                                <input ngModel
+                                 pattern='^[a-zA-Z0-9.-]+@[a-zA-Z0-9-.]+\\.[a-zA-Z]{2,5}$'
+                                 type="text" #loginEmail="ngModel" matInput name="email" placeholder="Email" required>
+                                 <mat-error *ngIf="loginEmail.errors?.['required']">
+                                    This Field is Mandatory.
+                                 </mat-error>
+                                 <mat-error *ngIf="loginEmail.errors?.['pattern']">
+                                    Please Enter Valid Email Id.
+                                 </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <label class="sr-only">Password</label>
+                                <input type="password" ngModel matInput #logInPassword="ngModel"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$"
+                                 name="password" placeholder="Password" required>
+                                 <mat-error *ngIf="logInPassword.errors?.['required']">
+                                    This Field is Mandatory.
+                                 </mat-error>
+                                 <mat-error *ngIf="logInPassword.errors?.['pattern']">
+                                    Please Enter Valid Password.
+                                 </mat-error>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" type="submit">LogIn</button>
+                       <button mat-button (click)="allreadyHaveAccount = !allreadyHaveAccount">Don't Have Account</button>
+
+                        </form>
+
+                    </ng-container>
+                    <ng-container *ngIf="!allreadyHaveAccount">
+                       <form class="loginForm" (ngSubmit)="onSignUp(signupForm)" #signupForm='ngForm'>
+                            <mat-form-field>
+                                <label class="sr-only">Email</label>
+                                <input ngModel
+                                 pattern='^[a-zA-Z0-9.-]+@[a-zA-Z0-9-.]+\\.[a-zA-Z]{2,5}$'
+                                 type="text" #signEmail="ngModel" matInput name="email" placeholder="Email" required>
+                                 <mat-error *ngIf="signEmail.errors?.['required']">
+                                    This Field is Mandatory.
+                                 </mat-error>
+                                 <mat-error *ngIf="signEmail.errors?.['pattern']">
+                                    Please Enter Valid Email Id.
+                                 </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <label class="sr-only">Password</label>
+                                <input type="password" ngModel matInput #signInPassword="ngModel"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$"
+                                 name="password" placeholder="Password" required>
+                                 <mat-error *ngIf="signInPassword.errors?.['required']">
+                                    This Field is Mandatory.
+                                 </mat-error>
+                                 <mat-error *ngIf="signInPassword.errors?.['pattern']">
+                                    Please Enter Valid Password.
+                                 </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-select name="userrole" ngModel required>
+                                    <mat-option >Select A UserRole </mat-option>
+                                    <mat-option value="Teacher">Teacher </mat-option>
+                                    <mat-option value="Student">Student</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" type="submit">Create Account</button>
+                       <button mat-button (click)="allreadyHaveAccount = !allreadyHaveAccount">Already Have Account</button>
+
+                       </form>
+
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
